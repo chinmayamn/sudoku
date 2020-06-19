@@ -1,0 +1,10 @@
+D:\Chinmaya\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\Chinmaya\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\Chinmaya\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\Chinmaya\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\Chinmaya\sudoku solver\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\Chinmaya\sudoku solver\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\sudoku solver.csproj.CoreCompileInputs.cache
+D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\sudoku solver.csprojResolveAssemblyReference.cache

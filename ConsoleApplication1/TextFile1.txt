@@ -1,0 +1,125 @@
+﻿  public void blockcalculate(int xstartingaxis,int xendingaxis, int ystartingaxis, int yendingaxis, int x_coordinate,int y_coordinate)
+         {
+             
+            
+             for (int i = 1; i <= 9; i++)
+             {
+                 string innertemp = string.Empty;
+                 for (int ji = 0; ji <= 8; ji++)                    //get all the numbers in the row for selected coordinate
+                 {
+                     innertemp = innertemp + "," + a[x_coordinate, ji].ToString();
+                 }
+
+                 s9.Clear(); //added on 10/10/2016 previous values will be cleared
+                 if (innertemp.Contains(i.ToString()) == false)    //find the number which is not in the row
+                 {
+                     s9.Push(i);                                    // that number will be pushed into s9
+                     int solvenumber = Convert.ToInt32(s9.Peek());  //look whether solvenumber is present in stack
+                     bool notPresentHorizontally = false;
+                     bool notPresentVertically = false;
+                     bool notPresentInBlock = false;
+                     for (int kk1 = 0; kk1 <= 8; kk1++)              //check whether solvenumber is present in that particular row
+                     {
+                         if (a[x_coordinate, kk1] == solvenumber)
+                         {
+                            notPresentHorizontally = true; break;
+                         }
+
+
+                     }
+                     for (int kk2 = 0; kk2 <= 8; kk2++)            ///check whether solvenumber is present in particular column wise
+                     {
+                         if (a[kk2, y_coordinate] == solvenumber)
+                         {
+                             int zz = kk2;
+                            notPresentVertically = true; break;
+                         }
+                     }
+                     notPresentInBlock = checkblock(xstartingaxis, xendingaxis,ystartingaxis,yendingaxis,  solvenumber);  //block where empty cell is present will be find out and there it will be checked whether no. is already present or not
+                     if (notPresentHorizontally == false && notPresentVertically == false && notPresentInBlock == true)   //if in horizontal and in vertical no. is not present means that number will be put in that block.
+                     {
+                        
+                         assignvalues(Convert.ToInt32(x_coordinate), Convert.ToInt32(y_coordinate),solvenumber);
+                         s9.Pop();
+                         //once done that no. will be removed from stack
+                     }
+                    //else  //add global error in order to find out easily and debug
+                    //{
+                    //    if (iterateCounter > 0)  //only if second or more iterates takes place
+                    //    {
+                    //        if (notPresentVertically == true) // for given co-ordinates in y axis same value present
+                    //        {
+                    //            globalError = globalError + "For a[" + x_coordinate + "," + y_coordinate + "] " + i + " present vertically\n";
+                    //        }
+                    //        if (notPresentHorizontally == true) // for given co-ordinates in y axis same value present
+                    //        {
+                    //            globalError = globalError + "For a[" + x_coordinate + "," + y_coordinate + "] " + i + " present horizontally\n";
+                    //        }
+                    //    }
+                    //}
+
+                }
+             }
+             
+         }
+
+
+
+		 -----------------------------------------------------------------
+		  string innertemp = string.Empty;
+            for (int i = xstartingaxis; i <= xendingaxis; i++) //get all numbers in block
+            {
+                for (int j = ystartingaxis; j <= yendingaxis; j++)
+                {
+                    innertemp = innertemp + "," + a[i, j].ToString();  //put it into innertemp
+                }
+            }
+
+                 s9.Clear(); //added on 10/10/2016 previous values will be cleared
+            for (int i = 1; i <= 9; i++)           //if any number is not present put to stack
+            {
+                if (innertemp.Contains(i.ToString()) == false)    //find the number which is not in the row
+                {
+                    s9.Push(i);
+                }
+
+            }
+
+            for(int m=0;m<s9.Count;m++)
+            {
+                int solvenumber = Convert.ToInt32(s9.Peek());  //look whether solvenumber is present in stack
+                bool notPresentHorizontally = false;
+                bool notPresentVertically = false;
+                bool notPresentInBlock = false;
+                for (int kk1 = 0; kk1 <= 8; kk1++)              //check whether solvenumber is present in that particular row
+                {
+                    if (a[x_coordinate, kk1] == solvenumber)
+                    {
+                        notPresentHorizontally = true; break;
+                    }
+
+
+                }
+                for (int kk2 = 0; kk2 <= 8; kk2++)            ///check whether solvenumber is present in particular column wise
+                {
+                    if (a[kk2, y_coordinate] == solvenumber)
+                    {
+                        int zz = kk2;
+                        notPresentVertically = true; break;
+                    }
+                }
+                notPresentInBlock = checkblock(xstartingaxis, xendingaxis, ystartingaxis, yendingaxis, solvenumber);  //block where empty cell is present will be find out and there it will be checked whether no. is already present or not
+                if (notPresentHorizontally == false && notPresentVertically == false && notPresentInBlock == true)   //if in horizontal and in vertical no. is not present means that number will be put in that block.
+                {
+
+                    assignvalues(Convert.ToInt32(x_coordinate), Convert.ToInt32(y_coordinate), solvenumber);
+                    s9.Pop();
+                    //once done that no. will be removed from stack
+                }
+            }
+                                                
+                    
+                   
+               
+            
+             

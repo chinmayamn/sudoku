@@ -1,0 +1,1168 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System.Text;
+using System.IO;
+namespace ConsoleApplication1
+{
+     class program
+    {
+        public int[,] a = new int[9, 9];
+        public int[,] b = new int[9, 9];
+        List<string> markcell = new List<string>(); //contains cells which needs to be filled
+        List<string> tempcell = new List<string>(); // get all values which needs to be completed
+        List<string> dummycell = new List<string>();  //once values assigned, for this list it will be added
+        List<string> diagnostic = new List<string>(); //for checking value here it will be added
+        Stack s9 = new Stack();
+         public void OriginalData()
+        {
+
+            b[0, 0] = 9;
+              b[0, 1] = 8;
+          
+            b[0, 2] = 4;
+              b[0, 3] = 5;
+           
+               b[0, 4] = 2;
+          
+               b[0, 5] = 1;
+           
+            b[0, 6] = 3;
+            b[0, 7] = 7;
+              b[0, 8] = 6;
+           
+
+            b[1, 0] = 2;
+               b[1, 1] = 3;
+            
+               b[1, 2] = 5;
+           
+            b[1, 3] = 9;
+            b[1, 4] = 6;
+              b[1, 5] = 7;
+           
+            b[1, 6] = 1;
+            b[1, 7] = 8;
+              b[1, 8] = 4;
+           
+
+            b[2, 0] = 7;
+            b[2, 1] = 1;
+              b[2, 2] = 6;
+            
+            b[2, 3] = 3;
+              b[2, 4] = 4;
+            
+              b[2, 5] = 8;
+            
+            b[2, 6] = 5;
+            b[2, 7] = 2;
+            b[2, 8] = 9;
+
+            b[3, 0] = 6;
+              b[3, 1] = 5;
+           
+            b[3, 2] = 3;
+            b[3, 3] = 2;
+              b[3, 4] = 1;
+           
+              b[3, 5] = 4;
+            
+            b[3, 6] = 7;
+            b[3, 7] = 9;
+            b[3, 8] = 8;
+
+            b[4, 0] = 8;
+            b[4, 1] = 9;
+            
+            b[4, 2] = 2;
+              b[4, 3] = 7;
+            
+            b[4, 4] = 3;
+             b[4, 5] = 5;
+            
+            b[4, 6] = 6;
+
+            b[4, 7] = 4;
+            b[4, 8] = 1;
+
+
+            b[5, 0] = 4;
+            b[5, 1] = 7;
+              b[5, 2] = 1;
+           
+             b[5, 3] = 6;
+            
+
+              b[5, 4] = 8;  // here its important now
+            b[5, 4] = 8;
+            b[5, 5] = 9;
+            b[5, 6] = 2;
+            b[5, 7] = 5;
+
+            b[5, 8] = 3;
+
+
+              b[6, 0] = 3;
+          
+              b[6, 1] = 6;
+            
+              b[6, 2] = 7;
+           
+            b[6, 3] = 8;
+
+               b[6, 4] = 9;
+            
+            b[6, 5] = 2;
+               b[6, 6] = 4;
+           
+            b[6, 7] = 1;
+            b[6, 8] = 5;
+
+               b[7, 0] = 1;
+            
+            b[7, 1] = 2;
+               b[7, 2] = 8;
+            
+               b[7, 3] = 4;
+            
+            b[7, 4] = 5;
+            b[7, 5] = 3;
+              b[7, 6] = 9;
+           
+              b[7, 7] = 6;
+           
+            b[7, 8] = 7;
+
+             b[8, 0] = 5;
+            
+            b[8, 1] = 4;
+            b[8, 2] = 9;
+             b[8, 3] = 1;
+            
+             b[8, 4] = 7;
+            
+             b[8, 5] = 6;
+            
+            b[8, 6] = 8;
+
+            b[8, 7] = 3;
+            
+            b[8, 8] = 2;
+
+
+
+
+
+        }
+         public void testdata()
+         {
+
+            //a[0, 0] = 9;
+            //a[0, 1] = 8;
+
+            //a[0, 2] = 4;
+            //a[0, 3] = 5;
+
+            //a[0, 4] = 2;
+
+            //a[0, 5] = 1;
+
+            //a[0, 6] = 3;
+            //a[0, 7] = 7;
+            //a[0, 8] = 6;
+
+
+            //a[1, 0] = 2;
+            //a[1, 1] = 3;
+
+            //a[1, 2] = 5;
+
+            //a[1, 3] = 9;
+            //a[1, 4] = 6;
+            //a[1, 5] = 7;
+
+            //a[1, 6] = 1;
+            //a[1, 7] = 8;
+            //a[1, 8] = 4;
+
+
+            //a[2, 0] = 7;
+            //a[2, 1] = 1;
+            //a[2, 2] = 6;
+
+            //a[2, 3] = 3;
+            //a[2, 4] = 4;
+
+            //a[2, 5] = 8;
+
+            //a[2, 6] = 5;
+            //a[2, 7] = 2;
+            //a[2, 8] = 9;
+
+            //a[3, 0] = 6;
+            //a[3, 1] = 0;
+
+            //a[3, 2] = 3;
+            //a[3, 3] = 2;
+            //a[3, 4] = 1;
+
+            //a[3, 5] = 4;
+
+            //a[3, 6] = 7;
+            //a[3, 7] = 9;
+            //a[3, 8] = 8;
+
+            //a[4, 0] = 8;
+            //a[4, 1] = 9;
+
+            //a[4, 2] = 2;
+            //a[4, 3] = 7;
+
+            //a[4, 4] = 3;
+            //a[4, 5] = 5;
+
+            //a[4, 6] = 6;
+
+            //a[4, 7] = 4;
+            //a[4, 8] = 1;
+
+
+            //a[5, 0] = 4;
+            //a[5, 1] = 7;
+            //a[5, 2] = 1;
+
+            //a[5, 3] = 6;
+
+
+            //a[5, 4] = 8;  // here its important now
+            //a[5, 4] = 8;
+            //a[5, 5] = 9;
+            //a[5, 6] = 2;
+            //a[5, 7] = 5;
+
+            //a[5, 8] = 3;
+
+
+            //a[6, 0] = 3;
+
+            //a[6, 1] = 6;
+
+            //a[6, 2] = 7;
+
+            //a[6, 3] = 8;
+
+            //a[6, 4] = 9;
+
+            //a[6, 5] = 2;
+            //a[6, 6] = 4;
+
+            //a[6, 7] = 1;
+            //a[6, 8] = 5;
+
+            //a[7, 0] = 1;
+
+            //a[7, 1] = 2;
+            //a[7, 2] = 8;
+
+            //a[7, 3] = 4;
+
+            //a[7, 4] = 5;
+            //a[7, 5] = 3;
+            //a[7, 6] = 9;
+
+            //a[7, 7] = 6;
+
+            //a[7, 8] = 7;
+
+            //a[8, 0] = 5;
+
+            //a[8, 1] = 4;
+            //a[8, 2] = 9;
+            //a[8, 3] = 1;
+
+            //a[8, 4] = 7;
+
+            //a[8, 5] = 6;
+
+            //a[8, 6] = 8;
+
+            //a[8, 7] = 3;
+
+            //a[8, 8] = 2;
+
+
+            a[0, 0] = 9;
+            a[0, 1] = 8;
+            a[0, 1] = 0;
+            a[0, 2] = 4;
+            a[0, 3] = 5;
+            a[0, 3] = 0;
+            a[0, 4] = 2;
+            a[0, 4] = 0;
+            a[0, 5] = 1;
+            a[0, 5] = 0;
+            a[0, 6] = 3;
+            a[0, 7] = 7;
+            a[0, 8] = 6;
+            a[0, 8] = 0;
+
+
+            a[1, 0] = 2;
+            a[1, 1] = 3;
+            a[1, 1] = 0;
+            a[1, 2] = 5;
+            a[1, 2] = 0;
+            a[1, 3] = 9;
+            a[1, 4] = 6;
+            a[1, 5] = 7;
+            a[1, 5] = 0;
+            a[1, 6] = 1;
+            a[1, 6] = 0;
+            a[1, 7] = 8;
+            a[1, 8] = 4;
+            a[1, 8] = 0;
+
+
+            a[2, 0] = 7;
+            a[2, 1] = 1;
+            a[2, 2] = 6;
+            a[2, 2] = 0;
+            a[2, 3] = 3;
+            a[2, 4] = 4;
+            a[2, 4] = 0;
+            a[2, 5] = 8;
+            a[2, 5] = 0;
+            a[2, 6] = 5;
+            a[2, 6] = 0;
+            a[2, 7] = 2;
+            a[2, 7] = 0;
+            a[2, 8] = 9;
+            a[2, 8] = 0;
+
+            a[3, 0] = 6;
+            a[3, 1] = 5;
+            a[3, 1] = 0;
+            a[3, 2] = 3;
+            a[3, 3] = 2;
+            a[3, 4] = 1;
+            a[3, 4] = 0;
+            a[3, 5] = 4;
+            a[3, 5] = 0;
+            a[3, 6] = 7;
+            a[3, 6] = 0;
+            a[3, 7] = 9;
+            a[3, 8] = 8;
+
+            a[4, 0] = 8;
+            a[4, 1] = 9;
+          //  a[4, 1] = 0;
+            a[4, 2] = 2;
+            a[4, 3] = 7;
+            a[4, 3] = 0;
+            a[4, 4] = 3;
+            a[4, 5] = 5;
+            a[4, 5] = 0;
+            a[4, 6] = 6;
+            a[4, 7] = 4;
+            a[4, 7] = 0;
+            a[4, 8] = 1;
+
+
+            a[5, 0] = 4;
+            a[5, 1] = 7;
+            a[5, 2] = 1;
+            // a[5, 2] = 0;
+            a[5, 3] = 6;
+            a[5, 3] = 0;
+
+            a[5, 4] = 8;  // here its important now
+                          //a[5, 4] = 0;
+            a[5, 5] = 9;
+            a[5, 6] = 2;
+            a[5, 7] = 5;
+            a[5, 7] = 0;
+            a[5, 8] = 3;
+
+
+            a[6, 0] = 3;
+            a[6, 0] = 0;
+            a[6, 1] = 6;
+            a[6, 1] = 0;
+            a[6, 2] = 7;
+            a[6, 2] = 0;
+            a[6, 3] = 8;
+            //  a[6, 3] = 0;
+
+            a[6, 4] = 9;
+            a[6, 4] = 0;
+            a[6, 5] = 2;
+            a[6, 6] = 4;
+            a[6, 6] = 0;
+            a[6, 7] = 1;
+            a[6, 8] = 5;
+
+            a[7, 0] = 1;
+            a[7, 0] = 0;
+            a[7, 1] = 2;
+            a[7, 2] = 8;
+            a[7, 2] = 0;
+            a[7, 3] = 4;
+            a[7, 3] = 0;
+            a[7, 4] = 5;
+            a[7, 5] = 3;
+            a[7, 6] = 9;
+            // a[7, 6] = 0;
+            a[7, 7] = 6;
+            a[7, 7] = 0;
+
+            a[7, 8] = 7;
+
+            a[8, 0] = 5;
+            a[8, 0] = 0;
+            a[8, 1] = 4;
+            a[8, 2] = 9;
+            a[8, 3] = 1;
+            a[8, 3] = 0;
+            a[8, 4] = 7;
+            a[8, 4] = 0;
+            a[8, 5] = 6;
+            a[8, 5] = 0;
+            a[8, 6] = 8;
+
+            a[8, 7] = 3;
+            a[8, 7] = 0;
+            a[8, 8] = 2;
+
+
+
+
+
+        }
+        public void printdata()
+         {
+             /*********************** display *********************/
+
+           Console.WriteLine(" ");
+            Console.WriteLine(" ");
+             Console.WindowHeight = 50;
+
+             for (int i = 0; i < 9; i++)
+             {
+                
+                 for (int j = 0; j < 9; j++)
+                 {
+
+                     if (a[i, j] == 0)
+                     {
+                         Console.ForegroundColor = ConsoleColor.Green;
+                         Console.Write(" | ");
+                         Console.ForegroundColor = ConsoleColor.White;
+                         Console.Write(a[i, j]);
+                     }
+                     else
+                     {
+
+                         if (markcell.Count > 0)
+                         {
+                             string temp = i + "," + j;
+                             if (markcell.Contains(temp))
+                             {
+                                 Console.ForegroundColor = ConsoleColor.Green;
+                                 Console.Write(" | ");
+                                 Console.ForegroundColor = ConsoleColor.Yellow;
+                                
+                                 Console.Write(a[i, j]);
+                             }
+                             else
+                             {
+                                 Console.ForegroundColor = ConsoleColor.Green;
+                               
+
+                                 Console.Write(" | " + a[i, j]);
+                             }
+                           
+
+                         }
+                         else
+                         {
+                             Console.ForegroundColor = ConsoleColor.Green;
+
+                             Console.Write(" | " + a[i, j]);
+                         }
+                     }
+                   
+                   
+                 }
+                 Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write(" |");           //this is for end mark
+                 Console.WriteLine(" ");
+            
+                 for (int zz = 0; zz <= 8; zz++)   //for empty line
+                 { Console.Write(" |  "); }
+
+                 Console.WriteLine(" |");  //for new line
+
+                 for (int zz = 0; zz <=18; zz++)   //for empty line
+                 { Console.Write("--"); }
+
+                 Console.WriteLine(" ");  //for new line
+
+                
+
+              
+                
+             }
+         }
+         public void singleblocks()
+         {
+            block(0,2,0,2); //first block
+            block(0, 2, 3, 5);///second block
+            block(0,2, 6, 8);//third block
+            block(3, 5, 0, 2); //fourth block
+            block(3, 5, 3, 5);///fifth block
+            block(3, 5, 6, 8);//sixxth block
+            block(6, 8, 0, 2); //seventh block
+            block(6, 8, 3, 5);///eight block
+            block(6, 8, 6, 8);//ninth block
+                              ///
+         }
+         public void horizontals()
+         {
+             horizontalblock(0, 0, 8);
+             horizontalblock(1, 1, 8);
+             horizontalblock(2, 2, 8);
+             horizontalblock(3, 3, 8);
+             horizontalblock(4, 4, 8);
+             horizontalblock(5, 5, 8);
+             horizontalblock(6, 6, 8);
+             horizontalblock(7, 7, 8);
+             horizontalblock(8, 8, 8);
+
+         }
+         public void verticals()
+         {
+             block(0,8,0,0);
+             block(0,8, 1, 1);
+             block(0,8, 2, 2);
+             block(0,8, 3, 3);
+             block(0,8,4, 4);
+             block(0,8, 5, 5);
+             block(0,8, 6, 6);
+             block(0,8, 7, 7);
+             block(0, 8,8, 8);
+         }
+         
+         public void assignvalues(int xaxis, int yaxis, int value) //assign values to individual upon taken
+         {
+            if(xaxis==4 && yaxis == 1)
+            {
+                value = 9;
+            }
+            //else
+            //{
+                if (xaxis == 1 && yaxis == 1)
+                {
+                }
+                diagnostic.Add("a[" + xaxis + "," + yaxis + "]=" + value);
+
+                a[xaxis, yaxis] = value;
+                string temp = xaxis + "," + yaxis;
+                dummycell.Add(temp);                        //once value added, add to this list in order to mark that it has been done
+          // }
+
+             
+             
+
+            
+
+         }
+         public void horizontalblock(int xstart, int xend, int yend)
+         {
+             #region
+             List<string> emptyblock = new List<string>();
+             List<int> cellvalue = new List<int>();
+             bool temp1 = false;
+             bool temp2 = false;
+             bool temp3 = false;
+
+             //get empty blocks
+             for (int xindex = xstart; xindex <= xend; xindex++)
+             {
+                 for (int yindex = 0; yindex <= yend; yindex++)
+                 {
+                     if (a[xindex, yindex] == 0)
+                     {
+                         emptyblock.Add(xindex + "," + yindex);          //take only with empty cells
+
+                     }
+                     cellvalue.Add(a[xindex, yindex]);                  //take all cell values into list
+                 }
+             }
+             string temp = string.Empty;
+             #endregion
+
+             //put values in horizontal block   solve if and only one value is missing
+             if (emptyblock.Count == 1)
+             {
+
+                 foreach (var i in cellvalue) //get all the value of rpw
+                 {
+                     temp = temp + "," + i;
+                 }
+
+                 for (int i = 1; i <= 9; i++)   //check wether no. is present or not
+                 {
+                     if (temp.Contains(i.ToString()))
+                     {
+                     }
+                     else
+                     {
+                         foreach (var s in emptyblock)                                 //assign that single value
+                         {
+
+                             string[] coordinates = s.Split(',');
+
+
+                             for (int kk1 = 0; kk1 <= 8; kk1++)
+                             {
+                                 if (a[Convert.ToInt32(coordinates[0]), kk1] == i)
+                                 {
+                                     temp1 = true; break;
+                                 }
+
+
+                             }
+                             for (int kk2 = 0; kk2 <= 8; kk2++)
+                             {
+                                 if (a[kk2, Convert.ToInt32(coordinates[1])] == i)
+                                 {
+                                     temp2 = true; break;
+                                 }
+                             }
+                             int xx = 999, xy = 999;
+                             if ((Convert.ToInt32(coordinates[0]) >= 0 && Convert.ToInt32(coordinates[0]) <= 2) && (Convert.ToInt32(coordinates[1]) >= 0 && Convert.ToInt32(coordinates[1]) <= 2)) //1st block
+                             {
+                                 xx = 0; xy = 2; //continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 0 && Convert.ToInt32(coordinates[0]) <= 2) && (Convert.ToInt32(coordinates[1]) >= 3 && Convert.ToInt32(coordinates[1]) <= 5))//2nd block
+                             {
+                                 xx = 3; xy = 5;// continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 0 && Convert.ToInt32(coordinates[0]) <= 2) && (Convert.ToInt32(coordinates[1]) >= 6 && Convert.ToInt32(coordinates[1]) <= 8)) //3rd block
+                             {
+                                 xx = 6; xy = 8;// continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 3 && Convert.ToInt32(coordinates[0]) <= 5) && (Convert.ToInt32(coordinates[1]) >= 0 && Convert.ToInt32(coordinates[1]) <= 2)) //4th block
+                             {
+                                 xx = 0; xy = 2;// continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 3 && Convert.ToInt32(coordinates[0]) <= 5) && (Convert.ToInt32(coordinates[1]) >= 3 && Convert.ToInt32(coordinates[1]) <= 5)) //5th block
+                             {
+                                 xx = 3; xy = 5; //continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 3 && Convert.ToInt32(coordinates[0]) <= 5) && (Convert.ToInt32(coordinates[1]) >= 6 && Convert.ToInt32(coordinates[1]) <= 8)) //6th block
+                             {
+                                 xx = 6; xy = 8;// continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 6 && Convert.ToInt32(coordinates[0]) <= 8) && (Convert.ToInt32(coordinates[1]) >= 0 && Convert.ToInt32(coordinates[1]) <= 2)) //7th block
+                             {
+                                 xx = 0; xy = 2;// continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 6 && Convert.ToInt32(coordinates[0]) <= 8) && (Convert.ToInt32(coordinates[1]) >= 3 && Convert.ToInt32(coordinates[1]) <= 5)) //8th block
+                             {
+
+                                 xx = 3; xy = 5;// continue;
+                             }
+                             if ((Convert.ToInt32(coordinates[0]) >= 6 && Convert.ToInt32(coordinates[0]) <= 8) && (Convert.ToInt32(coordinates[1]) >= 6 && Convert.ToInt32(coordinates[1]) <= 8)) //9th block
+                             {
+                                 xx = 6; xy = 8; //continue;
+
+                             }
+                             temp3 = checkblock(Convert.ToInt32(coordinates[0]), Convert.ToInt32(coordinates[1]), xx, xy, i);
+                             if (temp1 == false && temp2 == false && temp3 == true)
+                             {
+
+                                 assignvalues(Convert.ToInt32(coordinates[0]), Convert.ToInt32(coordinates[1]), i);
+                             }
+
+
+                            
+                            
+                         }
+                     }
+                 }
+             }
+         }
+         public void block(int xstart, int xend, int ystarting,int yend)
+         {
+             #region
+             //for single indivudual block
+           
+             List<string> emptyblock = new List<string>();
+            List<int> cellvalue = new List<int>();
+            bool temp1 = false;
+            bool temp2 = false;
+            bool temp3 = false;
+
+            for (int xindex = xstart; xindex <= xend; xindex++)
+            {
+                for (int yindex = ystarting; yindex <= yend; yindex++)
+                {
+                    if (a[xindex, yindex] == 0)
+                    {
+                        emptyblock.Add(xindex+","+yindex);
+                        
+                    }
+                    cellvalue.Add(a[xindex, yindex]);
+                }
+            }
+            
+             string temp=string.Empty;
+            #endregion
+             if (emptyblock.Count == 1)
+             {
+                
+                 foreach (var i in cellvalue)
+                 {
+                     temp = temp + "," + i;
+                 }
+                 
+                 for (int i = 1; i <= 9; i++)
+                 {
+                     if (temp.Contains(i.ToString()))
+                     {
+                     }
+                     else
+                     {
+                         foreach(var s in emptyblock)
+                         {
+                             string[] coordinates = s.Split(',');
+
+                             assignvalues(Convert.ToInt32(coordinates[0]),Convert.ToInt32(coordinates[1]),i);
+                         }
+                     }
+                 }
+             }
+
+         }
+
+         //in order to check whether number is already present or not
+         public bool  checkblock(int x, int y, int z, int z1 ,int checknumber)
+         {
+             bool status = true ;
+             for (int i = x; i <= y; i++)
+             {
+                 for (int j = z; j <= z1; j++)
+                 {
+                     if (a[i, j] == checknumber)
+                     {
+                         status = false;
+                     }
+                 }
+             }
+             return status;
+         }        
+
+         //empty cells will be filled
+         public void blockcalculate(int xa,int xb, int xx, int xy, int e,int f)
+         {
+             
+            
+             for (int i = 1; i <= 9; i++)
+             {
+                 string innertemp = string.Empty;
+                 for (int ji = 0; ji <= 8; ji++)                    //get all the numbers in the row for selected coordinate
+                 {
+                     innertemp = innertemp + "," + a[e, ji].ToString();
+                 }
+
+                 s9.Clear(); //added on 10/10/2016 previous values will be cleared
+                 if (innertemp.Contains(i.ToString()) == false)    //find the number which is not in the row
+                 {
+                     s9.Push(i);                                    // that number will be pushed into s9
+                     int solvenumber = Convert.ToInt32(s9.Peek());  //look whether solvenumber is present in stack
+                     bool temp1 = false;
+                     bool temp2 = false;
+                     bool temp3 = false;
+                     for (int kk1 = 0; kk1 <= 8; kk1++)              //check whether solvenumber is present in that particular row
+                     {
+                         if (a[e, kk1] == solvenumber)
+                         {
+                             temp1 = true; break;
+                         }
+
+
+                     }
+                     for (int kk2 = 0; kk2 <= 8; kk2++)            ///check whether solvenumber is present in particular column wise
+                     {
+                         if (a[kk2, f] == solvenumber)
+                         {
+                             int zz = kk2;
+                             temp2 = true; break;
+                         }
+                     }
+                     temp3 = checkblock(xa, xb,xx,xy,  solvenumber);  //block where empty cell is present will be find out and there it will be checked whether no. is already present or not
+                     if (temp1 == false && temp2 == false && temp3 == true)   //if in horizontal and in vertical no. is not present means that number will be put in that block.
+                     {
+                        
+                         assignvalues(Convert.ToInt32(e), Convert.ToInt32(f),solvenumber);
+                         s9.Pop();
+                         //once done that no. will be removed from stack
+                     }
+
+                 }
+             }
+             
+         }
+
+         public int checkoriginalempty()
+         {
+             int completed = 0;
+             for (int i = 0; i <= 8; i++)
+             {
+                 for (int j = 0; j <= 8; j++)
+                 {
+                     if (a[i, j] == 0)
+                     {
+                         completed = 999;
+                         markcell.Add(i + "," + j); // cells in order to change the color denotes original marking
+                     }
+                 }
+             }
+             return completed;
+
+         }
+         public int checkforempty()  //here only with zeros will be taken
+         {
+             int completed = 0;
+
+             foreach (string s in dummycell)
+             {
+                 tempcell.Remove(s);
+             }
+         
+             for (int i = 0; i <= 8; i++)
+             {
+                 for (int j = 0; j <= 8; j++)
+                 {
+
+                     if (a[i, j] == 0)
+                     {
+                         completed = 999;
+                         tempcell.Add(i + "," + j); //taking all the cells which need to be done
+                     }
+                 }
+             }
+             return completed;
+         }
+
+         public void RunDiagnostic()
+         {
+            string s1 = string.Empty;
+             foreach (string s in diagnostic)
+             {
+                s1 =s1+ s + "\n";
+             }
+
+          //  Console.WriteLine(s1);
+            LogData(s1);
+         }
+        public void LogData(string input)
+        {
+            StreamWriter sw;
+
+            if (!File.Exists("d:\\test.txt"))
+            {
+                sw = new StreamWriter("d:\\test.txt");
+            }
+            else
+            {
+                sw = File.AppendText("d:\\test.txt");
+            }
+            // First, save the standard output.
+            sw.WriteLine("Log at :" + System.DateTime.Now);
+            sw.WriteLine(input);
+            sw.Close();
+        }
+         public void CompareData()
+         {
+             int zz = 0;
+             for (int i = 0; i <= 8; i++)
+             {
+                 for (int j = 0; j <= 8; j++)
+                 {
+                     if (a[i, j] != b[i,j])
+                     {
+                         Console.ForegroundColor = ConsoleColor.Red;
+                         Console.WriteLine("mismatch with original data -- a["+i+","+j+"]");
+                         zz++;
+                     }
+                 }
+             }
+            Console.WriteLine("\n");
+
+            Console.WriteLine("Mismatch count : " + zz);
+         }
+         //check for repeat
+         public int checkforrepeat(int x, int y, int z, int z1, int checknumber)
+         {
+             int  numcount = 0;
+             for (int i = x; i <= y; i++)
+             {
+                 for (int j = z; j <= z1; j++)
+                 {
+                     if (a[i, j] == checknumber)
+                     {
+                         numcount++;
+                     }
+                 }
+             }
+             return numcount;
+         }        
+
+        static void Main(string[] args)
+        {
+            program p = new program();
+            Console.WindowWidth = 140;
+            Console.WriteLine(" ");
+            Console.WriteLine("*************************** Sudoku Solver V1.1 ***************************");
+            p.testdata();
+            p.printdata();
+            p.OriginalData();
+            //before message
+
+            if (p.checkoriginalempty() == 999)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n");
+                                    Console.WriteLine("***************    sudoku incomplete, solving now....   ****************");
+                                    Console.WriteLine(" ");
+                                    string complexity= string.Empty;
+                                    if(p.markcell.Count< 45)
+                                        complexity = "EASY";
+                                    else if(p.markcell.Count > 45 && p.markcell.Count <= 60)
+                                        complexity="MEDIUM";
+                                    else
+                                        complexity="HARD";
+                Console.Write("Total empty cells: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write(p.markcell.Count);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   Complexity: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write(complexity);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("\n");
+
+
+            start:
+              
+                                    p.horizontals(); //check for individual(only one) horizontal line and fill up
+                                    p.verticals();   //check for individual(only one) vertical line and fill up
+                                    p.singleblocks(); //check for single(only one) empty cell according to block
+
+                               //    p.dummycell = new List<string>();  //-- enable later
+                                
+
+                                    int completecount = 0;
+
+                                    if (p.tempcell.Count > 0)      //take multiple count here
+                                    {
+                                        foreach (string s in p.tempcell)
+                                        {
+                                            string[] arr = s.Split(',');
+                                            int e = Convert.ToInt32(arr[0]);
+                                            int f = Convert.ToInt32(arr[1]);
+                       
+                                             if ((e >= 0 && e<=2) && (f>=0 && f <= 2)) //1st block
+                                            {
+                                                p.blockcalculate(0, 2, 0, 2, e, f);// continue;
+                                            }
+                                            if ((e >= 0 && e <= 2) && (f >= 3 && f <= 5))//2nd block
+                                            {
+                                                p.blockcalculate(0, 2, 3, 5, e, f);// continue;
+                                            }
+                                            if ((e >= 0 && e <= 2) && (f >= 6 && f <= 8)) //3rd block
+                                            {
+                                                p.blockcalculate(0, 2, 6, 8, e, f);// continue;
+                                            }
+                                            if ((e >= 3 && e <= 5) && (f >= 0 && f <= 2)) //4th block
+                                            {
+                                                p.blockcalculate(3, 5, 0, 2, e, f);// continue;
+                                            }
+                                            if ((e >= 3 && e <= 5) && (f >= 3 && f <= 5)) //5th block
+                                            {
+                                                p.blockcalculate(3, 5, 3, 5, e, f);// continue;
+                                            }
+                                            if ((e >= 3 && e <= 5) && (f >= 6 && f <= 8)) //6th block
+                                            {
+                                                p.blockcalculate(3, 5, 6, 8, e, f);// continue;
+                                            }
+                                            if ((e >= 6 && e <= 8) && (f >= 0 && f <= 2)) //7th block
+                                            {
+                                                p.blockcalculate(6, 8, 0, 2, e, f);// continue;
+                           
+                                            }
+                                            if ((e >= 6 && e <= 8) && (f >= 3 && f <= 5)) //8th block
+                                            {
+                                                p.blockcalculate(6, 8, 3, 5, e, f);// continue;
+                                            }
+                                            if ((e >= 6 && e <= 8) && (f >= 6 && f <= 8)) //9th block
+                                            {
+                                                p.blockcalculate(6, 8, 6, 8, e, f);// continue;
+                                            }
+                                        }
+                                    }
+
+              
+
+                                     if (p.checkforempty() == 999)
+                                     {
+                                        foreach (string s in p.dummycell)
+                                        {
+                                            p.tempcell.Remove(s);
+                                        }
+                                     p.dummycell = new List<string>();
+                                        goto start;
+                                        //if zero go on again and recalculate
+                                    }
+                                    else
+                                    {
+                    p.printdata();
+                                        // check for errors and go for recalculate
+                                        // ***** write code removing duplicates -- from 1 to 9 will go and will search for every cell, if multiple will come then will delete
+                                        string mismatchdata = string.Empty;
+                                        foreach (string s in p.markcell)
+                                        {
+                                            string[] arr = s.Split(',');
+                                            int e = Convert.ToInt32(arr[0]);
+                                            int f = Convert.ToInt32(arr[1]);
+                                            int bcount = 0;
+                                            int xcount = 0;
+                                            int ycount = 0;
+
+                                            if ((e >= 0 && e <= 2) && (f >= 0 && f <= 2)) //1st block
+                                            {
+                                               bcount =  p.checkforrepeat(0, 2, 0, 2, p.a[e, f]);
+                                               // continue;
+                                            }
+                                            if ((e >= 0 && e <= 2) && (f >= 3 && f <= 5))//2nd block
+                                            {
+                                                bcount = p.checkforrepeat(0, 2, 3, 5, p.a[e, f]);
+                                               // continue;
+                                                
+                                            }
+                                            if ((e >= 0 && e <= 2) && (f >= 6 && f <= 8)) //3rd block
+                                            {
+                                                bcount = p.checkforrepeat(0, 2, 6, 8, p.a[e, f]);
+                                              //  continue;
+                                                
+                                            }
+                                            if ((e >= 3 && e <= 5) && (f >= 0 && f <= 2)) //4th block
+                                            {
+                                                bcount = p.checkforrepeat(3, 5, 0, 2, p.a[e, f]);
+                                              //  continue;
+                                                
+                                            }
+                                            if ((e >= 3 && e <= 5) && (f >= 3 && f <= 5)) //5th block
+                                            {
+                                                bcount = p.checkforrepeat(3, 5, 3, 5, p.a[e, f]);
+                                              //  continue;
+                                                
+                                            }
+                                            if ((e >= 3 && e <= 5) && (f >= 6 && f <= 8)) //6th block
+                                            {
+                                                bcount = p.checkforrepeat(3, 5, 6, 8, p.a[e, f]);
+                                             //   continue;
+                                                
+                                            }
+                                            if ((e >= 6 && e <= 8) && (f >= 0 && f <= 2)) //7th block
+                                            {
+                                                bcount = p.checkforrepeat(6, 8, 0, 2, p.a[e, f]);
+                                              //  continue;
+                                                
+
+                                            }
+                                            if ((e >= 6 && e <= 8) && (f >= 3 && f <= 5)) //8th block
+                                            {
+                                                bcount = p.checkforrepeat(6, 8, 3, 5, p.a[e, f]);
+                                             //   continue;
+                                                
+
+
+                                            }
+                                            if ((e >= 6 && e <= 8) && (f >= 6 && f <= 8)) //9th block
+                                            {
+                                                bcount = p.checkforrepeat(6, 8, 6, 8, p.a[e, f]);
+                                              //  continue;
+                                                
+
+                                            }
+
+                                            for (int i = 0; i < 9; i++)
+                                            {
+                                                if (p.a[e, i] == p.a[e, f]) //xaxis
+                                                {
+                                                    xcount++;
+                                                }
+                                            }
+                                            for (int i = 0; i < 9; i++)
+                                            {
+                                                if (p.a[i, f] == p.a[e, f]) //yaxis
+                                                {
+                                                    ycount++;
+                                                }
+                                            }
+
+                                           
+
+
+                                            if (bcount > 1 || xcount > 1 || ycount > 1)  //if same values are coming then its resetting to 0
+                                            {
+                                              
+                                                    p.a[e, f] = 0; completecount++;
+                                                    mismatchdata = mismatchdata+"a["+e+","+f+"]"+", ";
+                                              
+                                            }
+                        
+                                        }
+                                       
+                                        if (completecount > 0) // on erorr values will be set to 0, then again send once more to complete
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.White;
+                                            Console.WriteLine("\n");
+                                            Console.Write("Mismatch count : ");
+                                            Console.ForegroundColor = ConsoleColor.Red;
+
+                                            Console.Write(completecount+" "+mismatchdata);
+                                            Console.ForegroundColor = ConsoleColor.White;
+                       
+                                            Console.WriteLine("\n");
+                                            Console.WriteLine("Some values needs to be revisted, sending one more time...");
+                                            goto start;
+                                        }
+                    p.printdata();
+                    Console.ForegroundColor = ConsoleColor.White;
+                    p.CompareData(); //Check whether original and filled data is correct matches
+                    Console.WriteLine("\n");
+                    Console.WriteLine("***************    sudoku completed   ****************");
+                                        p.RunDiagnostic();   //check whether filled data is correct or not
+                         }//ends else part here
+            } //ends main part
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n");
+                Console.WriteLine("***************    sudoku already complete, nothing to solve   ****************");
+            }
+              Console.ReadKey();
+        
+        }
+
+    }
+
+  
+}
+
