@@ -541,12 +541,12 @@ namespace ConsoleApplication1
 
             set3_test[2, 0] = 0;
             set3_test[2, 1] = 4;
-            set3_test[2, 2] = 0;
-            set3_test[2, 3] = 0;
-            set3_test[2, 4] = 0;
+            set3_test[2, 2] = 8;
+            set3_test[2, 3] = 2;
+            set3_test[2, 4] = 1;
             set3_test[2, 5] = 6;
             set3_test[2, 6] = 3;
-            set3_test[2, 7] = 0;
+            set3_test[2, 7] = 5;
             set3_test[2, 8] = 7;
 
             set3_test[3, 0] = 0;
@@ -561,11 +561,11 @@ namespace ConsoleApplication1
 
             set3_test[4, 0] = 0;
             set3_test[4, 1] = 0;
-            set3_test[4, 2] = 0;
+            set3_test[4, 2] = 5;
             set3_test[4, 3] = 0;
             set3_test[4, 4] = 0;
             set3_test[4, 5] = 0;
-            set3_test[4, 6] = 0;
+            set3_test[4, 6] = 6;
             set3_test[4, 7] = 0;
             set3_test[4, 8] = 0;
 
@@ -573,7 +573,7 @@ namespace ConsoleApplication1
             set3_test[5, 1] = 1;
             set3_test[5, 2] = 3;
             set3_test[5, 3] = 6;
-            set3_test[5, 4] = 2;  // here its importcnt now
+            set3_test[5, 4] = 2;  // here its important now
             set3_test[5, 5] = 0;
             set3_test[5, 6] = 0;
             set3_test[5, 7] = 4;
@@ -584,9 +584,9 @@ namespace ConsoleApplication1
             set3_test[6, 1] = 0;
             set3_test[6, 2] = 6;
             set3_test[6, 3] = 4;
-            set3_test[6, 4] = 0;
+            set3_test[6, 4] = 8;
             set3_test[6, 5] = 0;
-            set3_test[6, 6] = 0;
+            set3_test[6, 6] = 7;
             set3_test[6, 7] = 1;
             set3_test[6, 8] = 0;
 
@@ -608,7 +608,98 @@ namespace ConsoleApplication1
             set3_test[8, 5] = 9;
             set3_test[8, 6] = 0;
             set3_test[8, 7] = 8;
-            set3_test[8, 8] = 0;
+            set3_test[8, 8] = 6;
+
+            //set3_test[0, 0] = 0;
+            //set3_test[0, 1] = 6;
+            //set3_test[0, 2] = 0;
+            //set3_test[0, 3] = 3;
+            //set3_test[0, 4] = 0;
+            //set3_test[0, 5] = 0;
+            //set3_test[0, 6] = 8;
+            //set3_test[0, 7] = 0;
+            //set3_test[0, 8] = 4;
+
+            //set3_test[1, 0] = 5;
+            //set3_test[1, 1] = 3;
+            //set3_test[1, 2] = 7;
+            //set3_test[1, 3] = 0;
+            //set3_test[1, 4] = 9;
+            //set3_test[1, 5] = 0;
+            //set3_test[1, 6] = 0;
+            //set3_test[1, 7] = 0;
+            //set3_test[1, 8] = 0;
+
+            //set3_test[2, 0] = 0;
+            //set3_test[2, 1] = 4;
+            //set3_test[2, 2] = 0;
+            //set3_test[2, 3] = 0;
+            //set3_test[2, 4] = 0;
+            //set3_test[2, 5] = 6;
+            //set3_test[2, 6] = 3;
+            //set3_test[2, 7] = 0;
+            //set3_test[2, 8] = 7;
+
+            //set3_test[3, 0] = 0;
+            //set3_test[3, 1] = 9;
+            //set3_test[3, 2] = 0;
+            //set3_test[3, 3] = 0;
+            //set3_test[3, 4] = 5;
+            //set3_test[3, 5] = 1;
+            //set3_test[3, 6] = 2;
+            //set3_test[3, 7] = 3;
+            //set3_test[3, 8] = 8;
+
+            //set3_test[4, 0] = 0;
+            //set3_test[4, 1] = 0;
+            //set3_test[4, 2] = 0;
+            //set3_test[4, 3] = 0;
+            //set3_test[4, 4] = 0;
+            //set3_test[4, 5] = 0;
+            //set3_test[4, 6] = 0;
+            //set3_test[4, 7] = 0;
+            //set3_test[4, 8] = 0;
+
+            //set3_test[5, 0] = 7;
+            //set3_test[5, 1] = 1;
+            //set3_test[5, 2] = 3;
+            //set3_test[5, 3] = 6;
+            //set3_test[5, 4] = 2;  // here its importcnt now
+            //set3_test[5, 5] = 0;
+            //set3_test[5, 6] = 0;
+            //set3_test[5, 7] = 4;
+            //set3_test[5, 8] = 0;
+
+
+            //set3_test[6, 0] = 3;
+            //set3_test[6, 1] = 0;
+            //set3_test[6, 2] = 6;
+            //set3_test[6, 3] = 4;
+            //set3_test[6, 4] = 0;
+            //set3_test[6, 5] = 0;
+            //set3_test[6, 6] = 0;
+            //set3_test[6, 7] = 1;
+            //set3_test[6, 8] = 0;
+
+            //set3_test[7, 0] = 0;
+            //set3_test[7, 1] = 0;
+            //set3_test[7, 2] = 0;
+            //set3_test[7, 3] = 0;
+            //set3_test[7, 4] = 6;
+            //set3_test[7, 5] = 0;
+            //set3_test[7, 6] = 5;
+            //set3_test[7, 7] = 2;
+            //set3_test[7, 8] = 3;
+
+            //set3_test[8, 0] = 1;
+            //set3_test[8, 1] = 0;
+            //set3_test[8, 2] = 2;
+            //set3_test[8, 3] = 0;
+            //set3_test[8, 4] = 0;
+            //set3_test[8, 5] = 9;
+            //set3_test[8, 6] = 0;
+            //set3_test[8, 7] = 8;
+            //set3_test[8, 8] = 0;
         }
 
 
