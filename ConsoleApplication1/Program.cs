@@ -637,13 +637,10 @@ namespace ConsoleApplication1
 
             if (checkoriginalempty() == 999)
             {
+
+
+                Console.SetCursorPosition(50, 8);
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\n");
-                Console.WriteLine("***************    sudoku incomplete, solving now....   ****************");
-                Console.WriteLine(" ");
-
-                left = Console.CursorLeft;top = Console.CursorTop; //get left and top positions and print in same place
-
                 string complexity = string.Empty;
                 if (markCellsToSolve.Count < 45)
                     complexity = "EASY";
@@ -662,6 +659,13 @@ namespace ConsoleApplication1
                 Console.Write("\n");
 
 
+                Console.SetCursorPosition(0, 35);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n");
+                Console.WriteLine("***************    sudoku incomplete, solving now....   ****************");
+                Console.WriteLine();
+
+                left = Console.CursorLeft; top = Console.CursorTop; //get left and top positions and print in same place
                 start:
 
                 horizontals(); //check for individual(only one) horizontal line and fill up
@@ -1156,7 +1160,7 @@ namespace ConsoleApplication1
 
                     Console.WriteLine("\n");
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("***************    sudoku program completed   ****************");
+                    Console.WriteLine("***************    sudoku solving completed   ****************");
                     RunDiagnostic();   //check whether filled data is correct or not
 
 
