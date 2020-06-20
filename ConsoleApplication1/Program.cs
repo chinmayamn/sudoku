@@ -506,21 +506,21 @@ namespace ConsoleApplication1
                 s1 =s1+ s + "\n";
              }
 
-          //  Console.WriteLine(s1);
+            Console.WriteLine(s1);
             LogData(s1);
          }
 
-        public void LogData(string input)
+        public void LogData(string input)           //logging data
         {
             StreamWriter sw;
 
-            if (!File.Exists("d:\\test.txt"))
+            if (!File.Exists(System.IO.Path.GetFullPath("test.txt")))
             {
-                sw = new StreamWriter("d:\\test.txt");
+                sw = new StreamWriter(System.IO.Path.GetFullPath("test.txt"));
             }
             else
             {
-                sw = File.AppendText("d:\\test.txt");
+                sw = File.AppendText(System.IO.Path.GetFullPath("test.txt"));
             }
             // First, save the standard output.
             sw.WriteLine("Log at :" + System.DateTime.Now);
@@ -537,13 +537,13 @@ namespace ConsoleApplication1
                 s1 = s1 + s + "\n";
             }
 
-            if (!File.Exists("d:\\test.txt"))
+            if (!File.Exists(System.IO.Path.GetFullPath("test.txt")))
             {
-                sw = new StreamWriter("d:\\test.txt");
+                sw = new StreamWriter(System.IO.Path.GetFullPath("test.txt"));
             }
             else
             {
-                sw = File.AppendText("d:\\test.txt");
+                sw = File.AppendText(System.IO.Path.GetFullPath("test.txt"));
             }
             // First, save the standard output.
             sw.WriteLine("Loop - "+ loopCounter +" Array Log at :" + System.DateTime.Now);

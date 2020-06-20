@@ -8,3 +8,9 @@ D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\sudoku solver.csproj.Cor
 D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
 D:\Chinmaya\sudoku solver\ConsoleApplication1\obj\Debug\sudoku solver.csprojResolveAssemblyReference.cache
+D:\Chinmaya\sudoku_git\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\Chinmaya\sudoku_git\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\Chinmaya\sudoku_git\ConsoleApplication1\obj\Debug\sudoku solver.csprojResolveAssemblyReference.cache
+D:\Chinmaya\sudoku_git\ConsoleApplication1\obj\Debug\sudoku solver.csproj.CoreCompileInputs.cache
+D:\Chinmaya\sudoku_git\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\Chinmaya\sudoku_git\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
