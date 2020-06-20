@@ -171,8 +171,8 @@ namespace ConsoleApplication1
                 a[xaxis, yaxis] = value;
                 string temp = xaxis + "," + yaxis;
                 cellsSolved.Add(temp);                        //once value added, add to this list in order to mark that it has been done
-                LogData(temp + "=" + value);
-                console
+                LogData("Assigning value & added to diagnostic :"+ temp + "=" + value);
+                Display("Assigning value & added to diagnostic :" + temp + "=" + value);
          }
 
          public void horizontalblock(int xstart, int xend, int yend)
@@ -592,8 +592,8 @@ namespace ConsoleApplication1
                  {
                      if (a[i, j] != b[i,j])
                      {
-                        
-                         Console.WriteLine("mismatch with original data -- a["+i+","+j+"] => "+b[i,j]);
+                         Display("mismatch with original data -- a[" + i + "," + j + "] => " + b[i, j]);
+                         LogData("mismatch with original data -- a[" + i + "," + j + "] => " + b[i, j]);
                          mismatchCounter++;
                      }
                  }
@@ -603,7 +603,10 @@ namespace ConsoleApplication1
             Console.Write("Mismatch count : ");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(mismatchCounter);
+            Display("Mismatch count : " + mismatchCounter);
+            LogData("Mismatch count : " + mismatchCounter);
          }
+
          //check for repeat
          public int checkforrepeat(int xstartingaxis, int xendingaxis, int ystartingaxis, int yendingaxis, int checknumber)
          {
