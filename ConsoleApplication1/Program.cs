@@ -10,7 +10,7 @@ namespace ConsoleApplication1
     {    
         int iterateCounter = 0;
         int loopCounter = 0;
-        int debug = 0;//set to 0 for no debug, for debug 1
+        int debug = 1;//set to 0 for no debug, for debug 1
         bool logdataactive = true;
         string globalError = string.Empty;
         public int[,] a = new int[9, 9];
@@ -20,14 +20,14 @@ namespace ConsoleApplication1
         List<string> cellsToSolvePrevious = new List<string>();//hold previous values to compare
         List<string> cellsSolved = new List<string>();  //once values assigned, for this list it will be added
         List<string> diagnostic = new List<string>(); //for checking value here it will be added
-        int left = 0; int top = 6; int speed = 0; //cursor position and speed
+        int left = 0; int top = 6; int speed = 30000; //cursor position and speed
         Stack s9 = new Stack();
      
         public void printdata()
          {
              
          
-          //  Console.SetCursorPosition(left, top);
+           Console.SetCursorPosition(left, top); //print in one place recursively
 
             /*********************** display *********************/
 
@@ -618,6 +618,9 @@ namespace ConsoleApplication1
                 Console.WriteLine("\n");
                 Console.WriteLine("***************    sudoku incomplete, solving now....   ****************");
                 Console.WriteLine(" ");
+
+                left = Console.CursorLeft;top = Console.CursorTop; //get left and top positions and print in same place
+
                 string complexity = string.Empty;
                 if (markCellsToSolve.Count < 45)
                     complexity = "EASY";
