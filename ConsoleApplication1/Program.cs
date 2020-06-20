@@ -35,7 +35,18 @@ namespace ConsoleApplication1
             Console.WriteLine(" ");
              Console.WindowHeight = 50;
 
-             for (int i = 0; i < 9; i++)
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int zz = 0; zz <= 18; zz++)   //for empty line
+            {
+                if (zz == 0)
+                    Console.Write(" --");
+                else if (zz == 18)
+                    Console.Write("-");
+                else
+                    Console.Write("--");
+            }
+            Console.WriteLine();
+            for (int i = 0; i < 9; i++)
              {
                 
                  for (int j = 0; j < 9; j++)
@@ -43,11 +54,15 @@ namespace ConsoleApplication1
 
                      if (a[i, j] == 0)
                      {
-                         Console.ForegroundColor = ConsoleColor.Green;
+                        
+
+                        Console.ForegroundColor = ConsoleColor.Green;
                          Console.Write(" | ");
                          Console.ForegroundColor = ConsoleColor.White;
                          Console.Write(a[i, j]);
-                     }
+
+                       
+                    }
                      else
                      {
 
@@ -85,7 +100,8 @@ namespace ConsoleApplication1
                    
                  }
                  Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(" |");           //this is for end mark
+             
+                    Console.Write(" |");           //this is for end mark
                  Console.WriteLine(" ");
             
                  for (int zz = 0; zz <= 8; zz++)   //for empty line
@@ -94,7 +110,14 @@ namespace ConsoleApplication1
                  Console.WriteLine(" |");  //for new line
 
                  for (int zz = 0; zz <=18; zz++)   //for empty line
-                 { Console.Write("--"); }
+                 {
+                    if(zz==0)
+                    Console.Write(" --");
+                    else if(zz==18)
+                        Console.Write("-");
+                    else
+                        Console.Write("--");
+                }
 
                  Console.WriteLine(" ");  //for new line              
              }
@@ -628,7 +651,7 @@ namespace ConsoleApplication1
                     complexity = "MEDIUM";
                 else
                     complexity = "HARD";
-                Console.Write("Total empty cells: ");
+                Console.Write(" Total empty cells: ");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(markCellsToSolve.Count);
                 Console.ForegroundColor = ConsoleColor.White;
