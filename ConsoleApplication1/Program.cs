@@ -11,6 +11,7 @@ namespace ConsoleApplication1
         int iterateCounter = 0;
         int loopCounter = 0;
         int debug = 0;//set to 0 for no debug, for debug 1
+        bool logdataactive = true;
         string globalError = string.Empty;
         public int[,] a = new int[9, 9];
         public int[,] b = new int[9, 9];
@@ -510,45 +511,51 @@ namespace ConsoleApplication1
             LogData(s1);
          }
 
-        public void LogData(string input)           //logging data
+        public void LogData(string input)           //logging data globally
         {
-            StreamWriter sw;
+            if (logdataactive)
+            {
+                StreamWriter sw;
 
-            if (!File.Exists(System.IO.Path.GetFullPath("test.txt")))
-            {
-                sw = new StreamWriter(System.IO.Path.GetFullPath("test.txt"));
+                if (!File.Exists(System.IO.Path.GetFullPath("test.txt")))
+                {
+                    sw = new StreamWriter(System.IO.Path.GetFullPath("test.txt"));
+                }
+                else
+                {
+                    sw = File.AppendText(System.IO.Path.GetFullPath("test.txt"));
+                }
+                // First, save the standard output.
+                sw.WriteLine("Log at :" + System.DateTime.Now);
+                sw.WriteLine(input);
+                sw.Close();
             }
-            else
-            {
-                sw = File.AppendText(System.IO.Path.GetFullPath("test.txt"));
-            }
-            // First, save the standard output.
-            sw.WriteLine("Log at :" + System.DateTime.Now);
-            sw.WriteLine(input);
-            sw.Close();
         }
 
         public void LogArrayData(List<string> input) //used to see cellsToSolve values
         {
-            StreamWriter sw;
-            string s1 = string.Empty;
-            foreach (string s in input)
-            {
-                s1 = s1 + s + "\n";
-            }
+            if (logdataactive)
+                {
+                StreamWriter sw;
+                string s1 = string.Empty;
+                foreach (string s in input)
+                {
+                    s1 = s1 + s + "\n";
+                }
 
-            if (!File.Exists(System.IO.Path.GetFullPath("test.txt")))
-            {
-                sw = new StreamWriter(System.IO.Path.GetFullPath("test.txt"));
+                if (!File.Exists(System.IO.Path.GetFullPath("test.txt")))
+                {
+                    sw = new StreamWriter(System.IO.Path.GetFullPath("test.txt"));
+                }
+                else
+                {
+                    sw = File.AppendText(System.IO.Path.GetFullPath("test.txt"));
+                }
+                // First, save the standard output.
+                sw.WriteLine("Loop - " + loopCounter + " Array Log at :" + System.DateTime.Now);
+                sw.WriteLine(s1);
+                sw.Close();
             }
-            else
-            {
-                sw = File.AppendText(System.IO.Path.GetFullPath("test.txt"));
-            }
-            // First, save the standard output.
-            sw.WriteLine("Loop - "+ loopCounter +" Array Log at :" + System.DateTime.Now);
-            sw.WriteLine(s1);
-            sw.Close();
         }
 
         public void CompareData()
