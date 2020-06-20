@@ -171,6 +171,8 @@ namespace ConsoleApplication1
                 a[xaxis, yaxis] = value;
                 string temp = xaxis + "," + yaxis;
                 cellsSolved.Add(temp);                        //once value added, add to this list in order to mark that it has been done
+                LogData(temp + "=" + value);
+                console
          }
 
          public void horizontalblock(int xstart, int xend, int yend)
@@ -385,15 +387,7 @@ namespace ConsoleApplication1
                         }
                      }
                  }
-               
-
-
-
-
-
-
-
-
+ 
             }
 
          }
@@ -530,11 +524,15 @@ namespace ConsoleApplication1
              {
                 s1 =s1+ s + "\n";
              }
-
-            Console.WriteLine(s1);
+            Display(s1);
+            
             LogData(s1);
          }
-
+        public void Display(string s1)
+        {
+            if(tracesteps)
+                Console.WriteLine(s1);
+        }
         public void LogData(string input)           //logging data globally
         {
             if (logdataactive)
