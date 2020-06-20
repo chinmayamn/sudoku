@@ -15,6 +15,7 @@ namespace ConsoleApplication1
         string globalError = string.Empty;
         public int[,] a = new int[9, 9];
         public int[,] b = new int[9, 9];
+        bool tracesteps = true;
         List<string> markCellsToSolve = new List<string>(); //contains cells which needs to be filled
         List<string> cellsToSolve = new List<string>(); // get all values which needs to be completed
         List<string> cellsToSolvePrevious = new List<string>();//hold previous values to compare
@@ -555,7 +556,7 @@ namespace ConsoleApplication1
             }
         }
 
-        public void LogArrayData(List<string> input) //used to see cellsToSolve values
+        public void LogData(List<string> input) //used to see cellsToSolve values
         {
             if (logdataactive)
                 {
@@ -652,12 +653,37 @@ namespace ConsoleApplication1
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(markCellsToSolve.Count);
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("   Complexity: ");
+                Console.Write("      Complexity: ");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(complexity);
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("\n");
 
+                Console.SetCursorPosition(60, 9);
+                Console.Write(" Logging: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                if (logdataactive)
+                    Console.Write("Enabled");
+                else
+                    Console.Write("Disabled");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("  Debugging: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                if (debug==1)
+                    Console.Write("Enabled");
+                else
+                    Console.Write("Disabled");
+                Console.WriteLine();
+
+                Console.SetCursorPosition(56, 10);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(" Trace Steps: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                if (tracesteps)
+                    Console.Write("Enabled");
+                else
+                    Console.Write("Disabled");
+                Console.ForegroundColor = ConsoleColor.White;
 
                 Console.SetCursorPosition(0, 35);
                 Console.ForegroundColor = ConsoleColor.White;
@@ -1020,7 +1046,7 @@ namespace ConsoleApplication1
                         EndSudoku();
                     }
                     else {
-                        LogArrayData(cellsToSolve);
+                        LogData(cellsToSolve);
                         printdata();
                         cellsToSolvePrevious = cellsToSolve;
                         goto start;
